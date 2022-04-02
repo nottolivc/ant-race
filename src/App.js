@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { ANT_INIT, ANT_IN_PROGRESS, ANT_CALCULATED } from './reducers/ants';
@@ -30,10 +30,14 @@ const App = (props) => {
       });
       Promise.all(results).then(() => uiCompleted());
     }
+    
     const { ui } = props;
     let values = data ? Object.values(data.ants) : [];
-    values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
     
+    useEffect(() => {
+      values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
+      setData(values)
+    }, [values]);
     console.table(values);
 
     return (
@@ -45,7 +49,7 @@ const App = (props) => {
       <br />
       <button onClick={startRace}>Start Race</button>
       {(() => {
-        values = data.ants.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
+        //values = data.ants.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
         console.table(values);
         switch (ui.state) {
           case UI_CALCULATED:
