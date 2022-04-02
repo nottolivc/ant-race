@@ -51,7 +51,7 @@ const App = (props) => {
               <h4>Winner: <p>{values[values.length-1].name}</p></h4>
             </div>);
           case UI_IN_PROGRESS:
-            console.table(ants, data);
+            console.table(ants);
             return (<div>
               <h4>Race in Progress </h4>
               <h4>Ants Completed: </h4>
@@ -79,7 +79,7 @@ const App = (props) => {
         <ul>
           {values ? values.map((ant, idx) => (
             <li key={idx} className="card">
-              <h4>Delayed by: {ant.delay} seconds {props.id}</h4>
+              <h4>Delayed by: {ant.delay} seconds </h4>
               {ant.likelihoodOfAntWinning && <div>Probability of Ant Winning: {ant.likelihoodOfAntWinning.toFixed(2) * 100 } %</div>}  
               {ant.state === ANT_IN_PROGRESS && <ProgressBarTimer interval={ant.delay} /> }
               </li>
