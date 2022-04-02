@@ -5,6 +5,7 @@ An ant race front end simulation built in react
 The Project:
 -----------
 # Algorithm that determines the win
+```
 ###### function generateAntWinLikelihoodCalculator() {
 ###### const delay = 7000 + Math.random() * 7000;
 ###### const likelihoodOfAntWinning = Math.random();
@@ -14,6 +15,7 @@ The Project:
 ######    }, delay);
 ######  };
 ###### }
+```
 - algorithm cannot be modified
 
 - Users must be able to tap a button that loads the ant data 
@@ -24,4 +26,7 @@ The Project:
     - highest
     - lowest
     - not yet calculated
-- repo can be cloned and then run npm install && npm start locally
+- repo can be cloned and then run 
+```
+npm install && npm start locally
+```
