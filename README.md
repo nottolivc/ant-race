@@ -24,4 +24,4 @@ The Project:
     - highest
     - lowest
     - not yet calculated
-# repo can be cloned and then run npm install && npm start locally
+- repo can be cloned and then run npm install && npm start locally
