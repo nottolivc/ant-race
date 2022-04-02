@@ -6,15 +6,15 @@ The Project:
 -----------
 # Algorithm that determines the win
 ```
-###### function generateAntWinLikelihoodCalculator() {
-###### const delay = 7000 + Math.random() * 7000;
-###### const likelihoodOfAntWinning = Math.random();
-###### return (callback) => {
-######   setTimeout(() => {
-######      callback(likelihoodOfAntWinning);
-######    }, delay);
-######  };
-###### }
+function generateAntWinLikelihoodCalculator() {
+    const delay = 7000 + Math.random() * 7000;
+    const likelihoodOfAntWinning = Math.random();
+    return (callback) => {
+        setTimeout(() => {
+            callback(likelihoodOfAntWinning);
+        }, delay);
+    };
+}
 ```
 - algorithm cannot be modified
 
