@@ -1,19 +1,19 @@
-# [ANT RACE] 
+# ANT RACE 
 [![release](https://img.shields.io/badge/release-v0.1-red.svg?style=flat-square)]()
 An ant race front end simulation built in react 
 
 The Project:
 -----------
-# [Algorithm that determines the win]
-# function generateAntWinLikelihoodCalculator() {
-# const delay = 7000 + Math.random() * 7000;
-# const likelihoodOfAntWinning = Math.random();
-# return (callback) => {
-#    setTimeout(() => {
-#      callback(likelihoodOfAntWinning);
-#    }, delay);
-#  };
-# }
+# Algorithm that determines the win
+ function generateAntWinLikelihoodCalculator() {
+ const delay = 7000 + Math.random() * 7000;
+ const likelihoodOfAntWinning = Math.random();
+ return (callback) => {
+    setTimeout(() => {
+      callback(likelihoodOfAntWinning);
+    }, delay);
+  };
+ }
 - algorithm cannot be modified
 
 - Users must be able to tap a button that loads the ant data 

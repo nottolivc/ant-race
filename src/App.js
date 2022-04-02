@@ -32,9 +32,9 @@ const App = (props) => {
     }
     const { ui } = props;
     let values = data ? Object.values(data.ants) : [];
-    //values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
+    values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
     
-    console.log(values, props);
+    console.table(values);
 
     return (
       <>
