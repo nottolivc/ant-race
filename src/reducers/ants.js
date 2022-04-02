@@ -5,7 +5,7 @@ export const ANT_IN_PROGRESS = "@@ANT IN_PROGRESS";
 
 
 export const reducer = (store={}, {type, payload}) => {
-    console.log(store, type, payload);
+    //console.log(store, type, payload);
     switch (type) {
       case ANT_INIT: {
           const newState = payload.reduce((map, ant) => {
