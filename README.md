@@ -26,7 +26,7 @@ function generateAntWinLikelihoodCalculator() {
     - highest
     - lowest
     - not yet calculated
-- repo can be cloned and then run 
+- repo can be cloned and then run locally
 ```
-npm install && npm start locally
+npm install && npm start 
 ```
