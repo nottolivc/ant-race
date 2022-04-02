@@ -10,7 +10,7 @@ import { generateAntWinLikelihoodCalculator } from './utils/algorithm';
 
 const App = (props) => {
     
-    const [data, setData] = useState(seedData);
+    const [data, setData] = useState({ants: []});
     
     const loadData = () => {
       setData(seedData);
@@ -51,42 +51,39 @@ const App = (props) => {
               <h4>Winner: <p>{values[values.length-1].name}</p></h4>
             </div>);
           case UI_IN_PROGRESS:
-            //console.log(ants, data);
+            console.table(ants, data);
             return (<div>
               <h4>Race in Progress </h4>
               <h4>Ants Completed: </h4>
               { ui.antsCompleted }
               <h4>Ants In Progress: </h4>
               { ui.antsInProgress }
-              {data ? data.ants.map((ant, id) => (
-                <ul>
-                <li key={id} className="card">
-                  <p> {ant.name} </p>
-                  <p> {ant.weight} </p>
-                  <p> {ant.color} </p> 
-                  <p> {ant.length} </p>
-                </li>
-                </ul>
-              )) : 'load data...'}
               <ProgressBar percentage={ui.antsCompleted / values.length * 100} />
             </div>);
           default:
             return (
               <div>
               <h1>Click to Load Ants and Start the Race</h1>
+              {data ? data.ants.map((ant, i) => (
+                <ul key={Date.now()} className='card' >
+                <li key={i}>
+                  <h5> Name: {ant.name} </h5>
+                  <h5> Weight: {ant.weight} </h5>
+                  <h5> Color: {ant.color} </h5> 
+                  <h5> Size: {ant.length} </h5>
+                </li>
+                </ul>
+              )) : 'load data...'}
               </div>);
         }})()}
         <ul>
-          {values ? values.map((ant, id) => (
-            <li key={id} className="card">
-            <ul>
-              <h4>Stats: {Object.values(ant)}</h4>
-              {ant.likelihoodOfAntWinning && 
-              <div>Probability of Ant Winning: {ant.likelihoodOfAntWinning.toFixed(2) * 100 } %</div>}  
-            </ul>
+          {values ? values.map((ant, idx) => (
+            <li key={idx} className="card">
+              <h4>Delayed by: {ant.delay} seconds {props.id}</h4>
+              {ant.likelihoodOfAntWinning && <div>Probability of Ant Winning: {ant.likelihoodOfAntWinning.toFixed(2) * 100 } %</div>}  
               {ant.state === ANT_IN_PROGRESS && <ProgressBarTimer interval={ant.delay} /> }
-            </li>
-          )) : null}
+              </li>
+          )) : 'load data...'}
         </ul>
       </div>
       {/* <Ant /> */}
