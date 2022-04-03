@@ -35,7 +35,7 @@ const App = (props) => {
           case UI_CALCULATED:
             return (
             <>
-              <h2>Race Done:</h2>
+              <h2>Race Done. Start New Race?</h2>
               <AntRacer />
             </>);
           case UI_IN_PROGRESS:
