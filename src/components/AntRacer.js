@@ -3,7 +3,7 @@ import seedData from '../api/data';
 import '../App.css';
 
 const AntRacer = ({startRaceRedux, props}) => {
-  console.log(props, startRaceRedux);
+  
   const [ants, setAnts] = useState({});
   // eslint-disable-next-line
   const [updateAnts, setUpdateAnts] = useState({});

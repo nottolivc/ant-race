@@ -6,7 +6,7 @@ import { UI_IN_PROGRESS, UI_CALCULATED } from './reducers/ui';
 import ProgressBarTimer, { ProgressBar } from './components/ProgressBar';
 import seedData from './api/data.json';
 import AntRacer from './components/AntRacer.js';
-//import Ant from './components/Ant';
+import Ant from './components/Ant';
 import { generateAntWinLikelihoodCalculator } from './utils/algorithm';
 
 const App = (props) => {     
@@ -70,8 +70,8 @@ const App = (props) => {
           )) : 'Load Data...'}
         </ul>
       </section>
-      {/* <h5>Ant Carousel</h5> */}
-      {/* <Ant /> */}
+      <h5>Ant Carousel</h5>
+       <Ant />
       <br />
       </>
     )
