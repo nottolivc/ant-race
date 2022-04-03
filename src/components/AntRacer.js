@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import seedData from '../api/data';
 import '../App.css';
 
-const AntRacer = () => {
-
+const AntRacer = ({startRaceRedux, props}) => {
+  console.log(props, startRaceRedux);
   const [ants, setAnts] = useState({});
   // eslint-disable-next-line
   const [updateAnts, setUpdateAnts] = useState({});
@@ -80,9 +80,13 @@ const AntRacer = () => {
 
   return ( 
     <>
+    <button type="button" onClick={loadData}>Load Ant Data</button>
+    <br />
+    <br />
     <div>
-      <button type="button" onClick={loadData}>Load Ant Data</button>
-      <button type="button" onClick={calculateOdds}>Start Racing</button>
+      <div onClick={startRaceRedux}>
+        <button type="button" onClick={calculateOdds}>Start Racing</button>
+      </div>
       <h2>Highest</h2>
       {`Ant Race to the Top!`}{status}
       <AntList />

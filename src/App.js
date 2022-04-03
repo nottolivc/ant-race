@@ -34,44 +34,45 @@ const App = (props) => {
         switch (ui.state) {
           case UI_CALCULATED:
             return (
-            <>
+              <>
               <h2>Race Done. Start New Race?</h2>
-              <AntRacer />
-            </>);
+              </>
+              );
           case UI_IN_PROGRESS:
-            console.table(ants);
-            return (<>
-              <h4>Race in Progress </h4>
-              <h4>Ants Completed: </h4>
-              { ui.antsCompleted }
-              <h4>Ants In Progress: </h4>
-              { ui.antsInProgress }
+            //console.table(ants);
+            return (
+              <>
+              <h4>Race in Progress...</h4>
+              <p>Ants Completed: { ui.antsCompleted }</p>
+              <p>Ants In Progress:  { ui.antsInProgress }</p>
               <ProgressBar percentage={ui.antsCompleted / values.length * 100} />
-            </>);
+              <br />
+              </>
+              );
           default:
             return (
               <>
               <h1>Click to Load Ants and Start the Race</h1>
-              <AntRacer />
-              </>);
+              </>
+              );
         }})()}
         <ul>
-          {values ? values.map((ant, idx) => (
+        <AntRacer props={props} startRaceRedux={startRaceRedux} />
+        <br />
+        <h4>Top to Bottom Metrics</h4>
+        {values ? values.map((ant, idx) => (
             <li key={idx} className="card">
               <h4>Delayed by: {ant.delay} seconds </h4>
               <h4>{Object.keys(idx)}</h4>
               {ant.likelihoodOfAntWinning && <div>Probability of Ant Winning: {ant.likelihoodOfAntWinning.toFixed(2) * 100 } %</div>}  
               {ant.state === ANT_IN_PROGRESS && <ProgressBarTimer interval={ant.delay} /> }
               </li>
-          )) : 'load data...'}
+          )) : 'Load Data...'}
         </ul>
       </section>
       {/* <h5>Ant Carousel</h5> */}
       {/* <Ant /> */}
       <br />
-      <br />
-      <h4>Watch a realtime dynamic ant race calculator</h4>
-      <button onClick={startRaceRedux}>Start Global Ant Race</button> 
       </>
     )
   }

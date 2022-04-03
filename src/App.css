@@ -1,13 +1,13 @@
 body {
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    color: rgb(82, 82, 82);
-    background: whitesmoke;
+    color: rgb(89, 85, 168);
+    background: rgb(255, 255, 255);
 }
 
 header {
-    color: #01d6cb;
-    background: white;
+    background: #01d6cb;
+    color: white;
     height: 8rem;
     padding: 0.8rem;
     border-radius: 4px;
