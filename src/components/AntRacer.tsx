@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import seedData from '../api/data';
+import seedData from '../api/data.json';
 import '../App.css';
 
-const AntRacer = ({startRaceRedux, props}) => {
-  
+const AntRacer = () => {
+
   const [ants, setAnts] = useState({});
   // eslint-disable-next-line
   const [updateAnts, setUpdateAnts] = useState({});
- 
-  const calculateOdds = () => {
-    function updateAnts(chances, idx) {
+
+  const calculateOdds = (): void => {
+    function updateAnts(chances:any, idx:any):void {
       const updateAnts = Object.assign({}, {ants});
       updateAnts.ants[idx].likelihoodOfAntWinning = chances;
-      updateAnts.ants[idx].calculatingOdds = "Calculating: ";
+      updateAnts.ants[idx].calculatingOdds = "Calculating...";
       setUpdateAnts(updateAnts);
     }
 
-    function generateAntWinLikelihoodCalculator() {
+    function generateAntWinLikelihoodCalculator():void {
       var delay = 7000 + Math.random() * 7000;
       var likelihoodOfAntWinning = Math.random();
-      return function(callback) {
+      return function(callback:any):void {
         setTimeout(function() {
           callback(likelihoodOfAntWinning);
         }, delay);
@@ -34,21 +34,18 @@ const AntRacer = ({startRaceRedux, props}) => {
       generateAntWinLikelihoodCalculator()(callback);
     });
   }
-  let done = false;
-  let status = updateAnts.ants && done === false ? <p>Race Started</p> : done === true && <p>Stopped</p>;
 
   const AntList = () => {
-    return antRaceBuilder();
+    return antBuilder();
   }
 
-  const antRaceBuilder = () => {
+  const antBuilder = () => {
       let ant = Object.keys(ants).sort((a, b) => ants[a].likelihoodOfAntWinning - ants[b].likelihoodOfAntWinning).reverse().map((idx) => {
       let racerId = "racer" + idx;
       let odds = Math.round(ants[idx].likelihoodOfAntWinning * 100)+"%";
-      
       return (
-        <section className="card">
-          <ul id="racers" className={racerId}>
+        <section className="card"> 
+        <ul id="racers" className={racerId}>
           <li>Odds of winning: {ants[idx].calculatingOdds}{ants[idx].likelihoodOfAntWinning}</li>
           <li>{ants[idx].name} has a {odds} probability of winning</li>
           <li>Name: {ants[idx].name}</li>
@@ -58,12 +55,11 @@ const AntRacer = ({startRaceRedux, props}) => {
         </section>
       );
     })
-    done = true;
     return ant;
   }
 
-
   const loadData = () => {
+    
     const ants = {};
     const fetchData = async () => {
       const result = seedData;
@@ -79,20 +75,11 @@ const AntRacer = ({startRaceRedux, props}) => {
 
 
   return ( 
-    <>
-    <button type="button" onClick={loadData}>Load Ant Data</button>
-    <br />
-    <br />
     <div>
-      <div onClick={startRaceRedux}>
-        <button type="button" onClick={calculateOdds}>Start Racing</button>
-      </div>
-      <h2>Highest</h2>
-      {`Ant Race to the Top!`}{status}
+      <button type="button" onClick={loadData}>Load Ant Data</button>
+      <button type="button" onClick={calculateOdds}>Start Racing</button>
       <AntList />
-      <h2>Lowest</h2>
     </div>
-    </>
   );
 };
 
