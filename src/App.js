@@ -1,80 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { ANT_INIT, ANT_IN_PROGRESS, ANT_CALCULATED } from './reducers/ants';
 import { UI_IN_PROGRESS, UI_CALCULATED } from './reducers/ui';
 import ProgressBarTimer, { ProgressBar } from './components/ProgressBar';
 import seedData from './api/data.json';
+import AntRacer from './components/AntRacer';
+import Ant from './components/Ant';
 import { generateAntWinLikelihoodCalculator } from './utils/algorithm';
-import AntRacer from './AntRacer';
 
-const App = (props) => {
+const App = (props) => {     
+    const { ants, ui } = props;
+    let values = ants ? Object.values(ants) : [];
     
-    const [data, setData] = useState({ants: []});
-    
-    const loadData = () => {
-      setData(seedData);
-      console.log(data);
-    };
-
-    const startRace = () => {
+    const startRaceRedux = () => {
       const { uiInProgress, inProgress, uiCompleted, completed } = props;
       uiInProgress();
-      const results = data.ants.map((e) => {
+      const requests = seedData.ants.map((item) => {
         return new Promise((resolve) => {
-          const getAnts = generateAntWinLikelihoodCalculator(e.name, inProgress)
-          getAnts((id, likelihoodOfAntWinning) => resolve({ id, likelihoodOfAntWinning }))
-      })
-      .then(({ id, likelihoodOfAntWinning }) => completed(id, likelihoodOfAntWinning))
+          const generate = generateAntWinLikelihoodCalculator(item.name, inProgress)
+          generate((id, likelihoodOfAntWinning) => resolve({ id, likelihoodOfAntWinning }))
+        })
+        .then(({ id, likelihoodOfAntWinning }) => completed(id, likelihoodOfAntWinning))
       });
-      Promise.all(results).then(() => uiCompleted());
+      Promise.all(requests).then(() => uiCompleted())
     }
-    const { ants, ui } = props;
-    let values = ants ? Object.values(ants) : data.ants;
 
     return (
       <>
-      <div>
-      <br />
-      <button onClick={loadData}>Load Data</button>
-      <br />
-      <br />
-      <button onClick={startRace}>Start Race</button>
+      <section>
       {(() => {
         values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning).reverse();
-        //console.table(props, Object.keys(ants));
         switch (ui.state) {
           case UI_CALCULATED:
             return (
-            <div>
-              <h2>Race Done:</h2>
-              <h4>Winner:{ants[ants[0]]}</h4>
-            </div>);
+            <>
+              <h2>Race Done. Start New Race?</h2>
+              <AntRacer />
+            </>);
           case UI_IN_PROGRESS:
             console.table(ants);
-            return (<div>
+            return (<>
               <h4>Race in Progress </h4>
               <h4>Ants Completed: </h4>
               { ui.antsCompleted }
               <h4>Ants In Progress: </h4>
               { ui.antsInProgress }
               <ProgressBar percentage={ui.antsCompleted / values.length * 100} />
-            </div>);
+            </>);
           default:
             return (
-              <div>
+              <>
               <h1>Click to Load Ants and Start the Race</h1>
-              {data ? data.ants.map((ant, i) => (
-                <ul key={Date.now()} className='card'>
-                <li key={i}>
-                  <h5> Name: {ant.name} </h5>
-                  <h5> Weight: {ant.weight} </h5>
-                  <h5> Color: {ant.color} </h5> 
-                  <h5> Size: {ant.length} </h5>
-                </li>
-                </ul>
-              )) : 'load data...'}
-              </div>);
+              <AntRacer />
+              </>);
         }})()}
         <ul>
           {values ? values.map((ant, idx) => (
@@ -86,9 +65,13 @@ const App = (props) => {
               </li>
           )) : 'load data...'}
         </ul>
-      </div>
-      {/* <Ant /> */}
-      <AntRacer />
+      </section>
+      <h5>Ant Carousel</h5>
+      <Ant />
+      <br />
+      <br />
+      <h4>Watch a realtime dynamic ant race calculator</h4>
+      <button onClick={startRaceRedux}>Start Global Ant Race</button> 
       </>
     )
   }

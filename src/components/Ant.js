@@ -25,7 +25,7 @@ export default function Ant() {
       </div>
       <div className="button-wrapper">
         <button className="button" onClick={reorder}>
-          Shift Ants
+          Move all Ants Around
         </button>
       </div>
     </div>
