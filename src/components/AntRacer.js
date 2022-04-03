@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import seedData from './api/data.json';
-import './App.css';
+import seedData from '../api/data.json';
+import '../App.css';
 
 const AntRacer = () => {
 
@@ -76,7 +76,7 @@ const AntRacer = () => {
 
   return ( 
     <div>
-      <button type="button" onClick={loadData}>Load JSON Ant Data</button>
+      <button type="button" onClick={loadData}>Load Ant Data</button>
       <button type="button" onClick={calculateOdds}>Start Racing</button>
       <AntList />
     </div>
