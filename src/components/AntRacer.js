@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import seedData from '../api/data.json';
+import seedData from '../api/data';
 import '../App.css';
 
 const AntRacer = () => {
@@ -7,12 +7,12 @@ const AntRacer = () => {
   const [ants, setAnts] = useState({});
   // eslint-disable-next-line
   const [updateAnts, setUpdateAnts] = useState({});
-
+ 
   const calculateOdds = () => {
     function updateAnts(chances, idx) {
       const updateAnts = Object.assign({}, {ants});
       updateAnts.ants[idx].likelihoodOfAntWinning = chances;
-      updateAnts.ants[idx].calculatingOdds = "Calculating...";
+      updateAnts.ants[idx].calculatingOdds = "Calculating: ";
       setUpdateAnts(updateAnts);
     }
 
@@ -34,18 +34,21 @@ const AntRacer = () => {
       generateAntWinLikelihoodCalculator()(callback);
     });
   }
+  let done = false;
+  let status = updateAnts.ants && done === false ? <p>Race Started</p> : <p>Stopped</p>;
 
   const AntList = () => {
-    return antBuilder();
+    return antRaceBuilder();
   }
 
-  const antBuilder = () => {
+  const antRaceBuilder = () => {
       let ant = Object.keys(ants).sort((a, b) => ants[a].likelihoodOfAntWinning - ants[b].likelihoodOfAntWinning).reverse().map((idx) => {
       let racerId = "racer" + idx;
       let odds = Math.round(ants[idx].likelihoodOfAntWinning * 100)+"%";
+      done = true;
       return (
-        <section className="card"> 
-        <ul id="racers" className={racerId}>
+        <section className="card">
+          <ul id="racers" className={racerId}>
           <li>Odds of winning: {ants[idx].calculatingOdds}{ants[idx].likelihoodOfAntWinning}</li>
           <li>{ants[idx].name} has a {odds} probability of winning</li>
           <li>Name: {ants[idx].name}</li>
@@ -55,11 +58,12 @@ const AntRacer = () => {
         </section>
       );
     })
+   
     return ant;
   }
 
+
   const loadData = () => {
-    
     const ants = {};
     const fetchData = async () => {
       const result = seedData;
@@ -78,7 +82,10 @@ const AntRacer = () => {
     <div>
       <button type="button" onClick={loadData}>Load Ant Data</button>
       <button type="button" onClick={calculateOdds}>Start Racing</button>
+      <h2>Highest</h2>
+      <p>Ant Race to the Top! {status}</p> 
       <AntList />
+      <h2>Lowest</h2>
     </div>
   );
 };

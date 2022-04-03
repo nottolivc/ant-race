@@ -1,17 +1,18 @@
-.App {
+body {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     color: rgb(82, 82, 82);
-    font-size: 1rem;
+    background: whitesmoke;
 }
 
 header {
-    background: #01d6cb;
-    color: white;
+    color: #01d6cb;
+    background: white;
     height: 8rem;
     padding: 0.8rem;
     border-radius: 4px;
     font-size: 2rem;
+    width: 100%;
 }
 
 .filler {
