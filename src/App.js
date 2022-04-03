@@ -6,7 +6,7 @@ import { UI_IN_PROGRESS, UI_CALCULATED } from './reducers/ui';
 import ProgressBarTimer, { ProgressBar } from './components/ProgressBar';
 import seedData from './api/data.json';
 import { generateAntWinLikelihoodCalculator } from './utils/algorithm';
-//import Ant from './components/Ant';
+import AntRacer from './AntRacer';
 
 const App = (props) => {
     
@@ -30,7 +30,7 @@ const App = (props) => {
       Promise.all(results).then(() => uiCompleted());
     }
     const { ants, ui } = props;
-    let values = ants ? Object.values(ants) : [];
+    let values = ants ? Object.values(ants) : data.ants;
 
     return (
       <>
@@ -41,14 +41,14 @@ const App = (props) => {
       <br />
       <button onClick={startRace}>Start Race</button>
       {(() => {
-        values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning);
-        //console.table(values);
+        values.sort((a, b) => a.likelihoodOfAntWinning - b.likelihoodOfAntWinning).reverse();
+        //console.table(props, Object.keys(ants));
         switch (ui.state) {
           case UI_CALCULATED:
             return (
             <div>
               <h2>Race Done:</h2>
-              <h4>Winner: <p>{values[values.length-1].name}</p></h4>
+              <h4>Winner:{ants[ants[0]]}</h4>
             </div>);
           case UI_IN_PROGRESS:
             console.table(ants);
@@ -65,7 +65,7 @@ const App = (props) => {
               <div>
               <h1>Click to Load Ants and Start the Race</h1>
               {data ? data.ants.map((ant, i) => (
-                <ul key={Date.now()} className='card' >
+                <ul key={Date.now()} className='card'>
                 <li key={i}>
                   <h5> Name: {ant.name} </h5>
                   <h5> Weight: {ant.weight} </h5>
@@ -80,6 +80,7 @@ const App = (props) => {
           {values ? values.map((ant, idx) => (
             <li key={idx} className="card">
               <h4>Delayed by: {ant.delay} seconds </h4>
+              <h4>{Object.keys(idx)}</h4>
               {ant.likelihoodOfAntWinning && <div>Probability of Ant Winning: {ant.likelihoodOfAntWinning.toFixed(2) * 100 } %</div>}  
               {ant.state === ANT_IN_PROGRESS && <ProgressBarTimer interval={ant.delay} /> }
               </li>
@@ -87,6 +88,7 @@ const App = (props) => {
         </ul>
       </div>
       {/* <Ant /> */}
+      <AntRacer />
       </>
     )
   }
