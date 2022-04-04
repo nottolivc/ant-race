@@ -1,7 +1,7 @@
 {
     "include": [
         "./src/**/*"
-, "full_app_spa_typescript/AntRaceApp.tsx"    ],
+    ],
     "compilerOptions": {
         "strict": true,
         "esModuleInterop": true,
