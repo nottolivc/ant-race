@@ -13,7 +13,9 @@ const Bubble = forwardRef(({ text, id }, ref) => (
         }}
       /> */}
     <img src={AntImage} alt="" className="circle" />
-    </div>
+    </div> 
+    <br />
+    
     <p className="text">{text}</p>
   </div>
 ));
