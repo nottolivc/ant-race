@@ -35,7 +35,7 @@ const AntRacer = ({startRaceRedux, props}) => {
     });
   }
   let done = false;
-  let status = updateAnts.ants && done === false ? <p>Race Started</p> : done === true && <p>Stopped</p>;
+  let status = updateAnts.ants && done === false ? <p>Race Initiated</p> : done === true && <p>Stopped</p>;
 
   const AntList = () => {
     return antRaceBuilder();
@@ -47,8 +47,8 @@ const AntRacer = ({startRaceRedux, props}) => {
       let odds = Math.round(ants[idx].likelihoodOfAntWinning * 100)+"%";
       
       return (
-        <section className="card">
-          <ul id="racers" className={racerId}>
+        <section key={Math.random()} className="card">
+          <ul id="racers" key={idx} className={racerId}>
           <li>Odds of winning: {ants[idx].calculatingOdds}{ants[idx].likelihoodOfAntWinning}</li>
           <li>{ants[idx].name} has a {odds} probability of winning</li>
           <li>Name: {ants[idx].name}</li>
@@ -61,7 +61,6 @@ const AntRacer = ({startRaceRedux, props}) => {
     done = true;
     return ant;
   }
-
 
   const loadData = () => {
     const ants = {};
@@ -80,10 +79,10 @@ const AntRacer = ({startRaceRedux, props}) => {
 
   return ( 
     <>
-    <button type="button" onClick={loadData}>Load Ant Data</button>
+    <button type="button" onClick={loadData}>Load Ants Data</button>
     <br />
     <br />
-    <div>
+    <main>
       <div onClick={startRaceRedux}>
         <button type="button" onClick={calculateOdds}>Start Racing</button>
       </div>
@@ -91,7 +90,7 @@ const AntRacer = ({startRaceRedux, props}) => {
       {`Ant Race to the Top!`}{status}
       <AntList />
       <h2>Lowest</h2>
-    </div>
+    </main>
     </>
   );
 };
