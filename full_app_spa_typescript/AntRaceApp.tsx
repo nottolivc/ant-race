@@ -10,10 +10,12 @@ const AntRaceApp = () => {
   
   // needs all any type changed if possible to strictest type/interface declaration 
   // This is a Full Lean MVP version of the Entire App in one TypeScript/TSX file
-  // Initial basic version runs HERE: https://codesandbox.io/s/react-typescript-forked-vguprc?file=/src/App.tsx
+  // Initial basic version runs HERE: https://codesandbox.io/s/react-typescript-forked-xvi26r?file=/src/App.tsx
+  
   const calculateOdds = () => {
     function updateAnts(chances:any, idx:any) {
       const updateAnts:any = Object.assign({}, {ants});
+      
       updateAnts.ants[idx].likelihoodOfAntWinning = chances;
       updateAnts.ants[idx].calculatingOdds = "Calculating...";
       setUpdateAnts(updateAnts);
