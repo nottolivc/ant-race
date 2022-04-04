@@ -70,11 +70,11 @@ const AntRaceApp: React.FC = () => {
           <React.Fragment>
             <section className="card">
               <ul id="racers" className={racerId}>
-                <li>
+                <li key={idx}>
                   Odds of winning: {ants[idx].calculatingOdds}
                   {ants[idx].likelihoodOfAntWinning}
                 </li>
-                <li>
+                <li key={Date.now()}>
                   {ants[idx].name} has a {odds} probability of winning
                 </li>
                 <li>Name: {ants[idx].name}</li>
@@ -82,7 +82,7 @@ const AntRaceApp: React.FC = () => {
                 <li>Weight: {ants[idx].weight}</li>
               </ul>
             </section>
-          </React.Fragment>
+        </React.Fragment>
         );
       });
     return ant;

@@ -59,7 +59,7 @@ const App = (props) => {
         <ul>
         <AntRacer props={props} startRaceRedux={startRaceRedux} />
         <br />
-        <h4>Top to Bottom Metrics</h4>
+        <h4>Top to Bottom Metrics Display</h4>
         {values ? values.map((ant, idx) => (
             <li key={idx} className="card">
               <h4>Delayed by: {ant.delay} seconds </h4>
@@ -70,7 +70,6 @@ const App = (props) => {
           )) : 'Load Data...'}
         </ul>
       </section>
-      <h5>Ant Carousel</h5>
        <Ant />
       <br />
       </>
