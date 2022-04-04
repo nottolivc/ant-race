@@ -97,7 +97,7 @@ const AntRacer = ({startRaceRedux}) => {
         <button type="button" onClick={calculateOdds}>Start Racing</button>
         </span>
       </div>
-      <h2>Highest Score up Top</h2>
+      <h2>Highest Score Up Here Wins</h2>
         {status}
       <br />
       <AntList />
