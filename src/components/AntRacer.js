@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import seedData from '../api/data';
 import '../App.css';
 
-const AntRacer = ({startRaceRedux, props}) => {
+const AntRacer = ({startRaceRedux}) => {
   
   const [ants, setAnts] = useState({});
+  const [isActive, setActive] = useState(false);
   // eslint-disable-next-line
   const [updateAnts, setUpdateAnts] = useState({});
  
+  const toggleClass = () => {
+    setActive(!isActive);
+  };
+
   const calculateOdds = () => {
     function updateAnts(chances, idx) {
+      
       const updateAnts = Object.assign({}, {ants});
       updateAnts.ants[idx].likelihoodOfAntWinning = chances;
       updateAnts.ants[idx].calculatingOdds = "Calculating: ";
@@ -47,18 +53,21 @@ const AntRacer = ({startRaceRedux, props}) => {
       let odds = Math.round(ants[idx].likelihoodOfAntWinning * 100)+"%";
       
       return (
-        <section key={Math.random()} className="card">
+      <main className={isActive ? 'move' : null}>
+      <section key={Math.random()} className="card">
           <ul id="racers" key={idx} className={racerId}>
           <li>Odds of winning: {ants[idx].calculatingOdds}{ants[idx].likelihoodOfAntWinning}</li>
           <li>{ants[idx].name} has a {odds} probability of winning</li>
           <li>Name: {ants[idx].name}</li>
           <li>Length: {ants[idx].length}</li>
           <li>Weight: {ants[idx].weight}</li>
-        </ul>
+          </ul>
         </section>
+        </main>
       );
     })
     done = true;
+
     return ant;
   }
 
@@ -84,10 +93,13 @@ const AntRacer = ({startRaceRedux, props}) => {
     <br />
     <main>
       <div onClick={startRaceRedux}>
+        <span onClick={toggleClass}>
         <button type="button" onClick={calculateOdds}>Start Racing</button>
+        </span>
       </div>
-      <h2>Highest</h2>
-      {`Ant Race to the Top!`}{status}
+      <h2>Highest Score up Top</h2>
+        {status}
+      <br />
       <AntList />
       <h2>Lowest</h2>
     </main>
