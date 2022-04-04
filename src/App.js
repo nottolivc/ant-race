@@ -15,6 +15,7 @@ const App = (props) => {
     
     const startRaceRedux = () => {
       const { uiInProgress, inProgress, uiCompleted, completed } = props;
+      
       uiInProgress();
       const requests = seedData.ants.map((item) => {
         return new Promise((resolve) => {
@@ -39,7 +40,6 @@ const App = (props) => {
               </>
               );
           case UI_IN_PROGRESS:
-            //console.table(ants);
             return (
               <>
               <h4>Race in Progress...</h4>
